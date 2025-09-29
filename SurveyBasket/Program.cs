@@ -7,9 +7,9 @@ namespace SurveyBasket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
             // 👇 تسجّل كل الخدمات (Controllers + FluentValidation + Mapster + Swagger)
-            builder.Services.AddProjectServices();
+            builder.Services.AddProjectServices(builder.Configuration);
 
             var app = builder.Build();
 

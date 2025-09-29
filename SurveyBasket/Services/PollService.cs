@@ -8,7 +8,7 @@ namespace SurveyBasket.Services
 
 			];
 
-        public Poll Get(int id) => Polls.SingleOrDefault(x => x.Id == id);
+        public Poll Get(int id) => Polls.SingleOrDefault(x => x.Id == id)!;
 
 
         public List<Poll> GetAll() => Polls;

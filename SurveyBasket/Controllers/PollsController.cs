@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SurveyBasket.Services;
-using SurveyBasket.Contract.Requests;
-using SurveyBasket.Contract.Responses;
+
 
 
 namespace ProjectRESTFullApi.Controllers

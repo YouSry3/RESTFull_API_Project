@@ -8,6 +8,7 @@ namespace ProjectRESTFullApi.Mapping
         {
             config.NewConfig<Poll, PollResponse>()
                 .Map(dest => dest.Notes, src => src.Description);
+
 		}
     }
 }

@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using SurveyBasket.Contract.Requests;
+﻿
 
 namespace ProjectRESTFullApi.Contract.Validations
 {
