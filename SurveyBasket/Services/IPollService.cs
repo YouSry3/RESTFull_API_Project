@@ -2,10 +2,10 @@
 {
     public interface IPollService
     {
-        List<Poll> GetAll();
-        Poll Get(int id);
-        Poll Add(Poll newPoll);
-        bool Update(int id, Poll updatedPoll);
-        bool Delete(int id);
+        Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<Poll> GetAsync(int id, CancellationToken cancellationToken = default);
+        Task<Poll> AddAsync(Poll newPoll, CancellationToken cancellationToken=default);
+        Task<bool> UpdateAsync(int id, Poll updatedPoll , CancellationToken cancellationToken = default);
+        Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default);
 	}
 }

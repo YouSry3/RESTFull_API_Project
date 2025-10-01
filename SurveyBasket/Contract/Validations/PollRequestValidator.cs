@@ -8,10 +8,10 @@ namespace ProjectRESTFullApi.Contract.Validations
         {
             RuleFor(x => x.Title)
                 .NotEmpty()
-                .Length(5, 100);
+                .Length(3, 100);
             RuleFor(x => x.Description)
                 .NotEmpty()
-                .Length(10, 500);
+                .Length(3, 500);
 
 
         }

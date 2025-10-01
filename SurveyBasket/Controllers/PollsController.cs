@@ -12,43 +12,42 @@ namespace ProjectRESTFullApi.Controllers
 
 
 		[HttpGet("{id:int}")]
-        public IActionResult Get([FromRoute]int id)
+        public async Task<IActionResult> Get([FromRoute]int id, CancellationToken cancellationToken )
         {
-            var IsExist = _PollService.Get(id);
+            var IsExist =await _PollService.GetAsync(id, cancellationToken);
 
 
             return IsExist == null ? NotFound() : Ok(IsExist);
         }
 
         [HttpGet]
-        public IActionResult GetAll() {
-            var response = _PollService.GetAll().Select(p => p.Adapt<PollResponse>());
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {
+            var Polls = await _PollService.GetAllAsync(cancellationToken);
+            var PollResponse = Polls.Adapt<List<PollResponse>>();
 
-            return Ok(response);
+            return Ok(PollResponse);
         }
 
 
         [HttpPost]
-        public IActionResult Add([FromBody]PollRequest Request)
+        public async Task<IActionResult> Add([FromBody]PollRequest Request, CancellationToken cancellationToken)
         {
-            var createdPoll = _PollService.Add(Request.Adapt<Poll>());
+            var createdPoll =await _PollService.AddAsync(Request.Adapt<Poll>(), cancellationToken);
             return CreatedAtAction(nameof(Get), new { id = createdPoll.Id }, createdPoll.Adapt<PollResponse>());
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult Update([FromRoute]int id, PollRequest Request)
+        public async Task<IActionResult> Update([FromRoute]int id, PollRequest Requestm,CancellationToken cancellationToken)
         {
-            var isUpdate = _PollService.Update(id, Request.Adapt<Poll>());
+            var isUpdate =await _PollService.UpdateAsync(id, Request.Adapt<Poll>(), cancellationToken);
            
 
             return !isUpdate ? NotFound() :NoContent();
 
 		}
         [HttpDelete("{id:int}")]
-        public IActionResult Delete([FromRoute] int id)=> _PollService.Delete(id) ? NoContent() : NotFound();
-
-
-     
+        public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken)=>
+            await _PollService.DeleteAsync(id, cancellationToken) ? NoContent() : NotFound();
 
 
 
