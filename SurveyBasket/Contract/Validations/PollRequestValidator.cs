@@ -11,9 +11,22 @@ namespace ProjectRESTFullApi.Contract.Validations
                 .Length(3, 100);
             RuleFor(x => x.Description)
                 .NotEmpty()
-                .Length(3, 500);
+                .Length(3, 1500);
+            RuleFor(x => x.StartAt)
+                .NotEmpty()
+                .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.Now));
+
+            RuleFor(x => x)
+                .Must(HasVaildDate)
+                .WithName(nameof(PollRequest.EndsAt))
+                .WithMessage("{PropertyName} must be greater than or equal to StartAt");
 
 
+        }
+        public bool HasVaildDate(PollRequest pollRequest)
+        {
+          
+            return pollRequest.EndsAt >= pollRequest.StartAt;
         }
     }
 }

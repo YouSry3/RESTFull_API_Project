@@ -41,6 +41,8 @@ namespace SurveyBasket.Services
             IsExitPoll.Description = updatedPoll.Description;
             IsExitPoll.StartAt = updatedPoll.StartAt;
             IsExitPoll.EndsAt = updatedPoll.EndsAt;
+            IsExitPoll.IsPublished = updatedPoll.IsPublished;
+
 
             await _context.SaveChangesAsync(cancellationToken);
 
