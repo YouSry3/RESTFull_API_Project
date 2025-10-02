@@ -41,7 +41,6 @@ namespace SurveyBasket.Services
             IsExitPoll.Description = updatedPoll.Description;
             IsExitPoll.StartAt = updatedPoll.StartAt;
             IsExitPoll.EndsAt = updatedPoll.EndsAt;
-            IsExitPoll.IsPublished = updatedPoll.IsPublished;
 
 
             await _context.SaveChangesAsync(cancellationToken);
@@ -58,6 +57,20 @@ namespace SurveyBasket.Services
             await _context.SaveChangesAsync(cancellationToken);
             return true;
        
+        }
+
+        public async Task<bool> TogglePublishAsync(int id, CancellationToken cancellationToken = default)
+        {
+
+            var IsExitPoll = await GetAsync(id, cancellationToken);
+
+            if (IsExitPoll == null) return false;
+
+            IsExitPoll.IsPublished = !IsExitPoll.IsPublished;
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return true;
         }
     }
 }

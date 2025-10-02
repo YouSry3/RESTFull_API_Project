@@ -45,6 +45,15 @@ namespace ProjectRESTFullApi.Controllers
             return !isUpdate ? NotFound() :NoContent();
 
 		}
+
+        [HttpPut("{id:int}/TogglePublish")]
+        public async Task<IActionResult> Update([FromRoute] int id, CancellationToken cancellationToken)
+        {
+            var isUpdate = await _PollService.TogglePublishAsync(id, cancellationToken);
+
+            return !isUpdate ? NotFound() : NoContent();
+
+        }
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken)=>
             await _PollService.DeleteAsync(id, cancellationToken) ? NoContent() : NotFound();

@@ -23,10 +23,11 @@ namespace ProjectRESTFullApi.Contract.Validations
 
 
         }
-        public bool HasVaildDate(PollRequest pollRequest)
+        private bool HasVaildDate(PollRequest pollRequest)
         {
           
             return pollRequest.EndsAt >= pollRequest.StartAt;
         }
+    
     }
 }

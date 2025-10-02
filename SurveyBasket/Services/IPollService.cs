@@ -7,5 +7,6 @@
         Task<Poll> AddAsync(Poll newPoll, CancellationToken cancellationToken=default);
         Task<bool> UpdateAsync(int id, Poll updatedPoll , CancellationToken cancellationToken = default);
         Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default);
-	}
+        Task<bool> TogglePublishAsync(int id, CancellationToken cancellationToken = default);
+    }
 }
