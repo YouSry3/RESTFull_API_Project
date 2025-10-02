@@ -1,4 +1,6 @@
-﻿using SurveyBasket; // مهم عشان AddProjectServices تشتغل (Namespace بتاعك)
+﻿using SurveyBasket;
+using SurveyBasket.Entities;
+using SurveyBasket.Persistence; // مهم عشان AddProjectServices تشتغل (Namespace بتاعك)
 
 namespace SurveyBasket
 {
@@ -7,7 +9,10 @@ namespace SurveyBasket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
+            builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
             // 👇 تسجّل كل الخدمات (Controllers + FluentValidation + Mapster + Swagger)
             builder.Services.AddProjectServices(builder.Configuration);
 
@@ -22,6 +27,7 @@ namespace SurveyBasket
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
+            app.MapIdentityApi<ApplicationUser>();
             app.MapControllers();
 
             app.Run();
