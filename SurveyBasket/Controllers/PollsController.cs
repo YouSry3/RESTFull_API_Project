@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SurveyBasket.Contract.Polls;
+using SurveyBasket.Services.Polls;
 
 
 
@@ -19,8 +22,8 @@ namespace ProjectRESTFullApi.Controllers
 
             return IsExist == null ? NotFound() : Ok(IsExist);
         }
-
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {
             var Polls = await _PollService.GetAllAsync(cancellationToken);
             var PollResponse = Polls.Adapt<List<PollResponse>>();

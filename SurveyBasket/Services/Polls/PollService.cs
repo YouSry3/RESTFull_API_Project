@@ -1,7 +1,6 @@
-﻿
-using SurveyBasket.Persistence;
+﻿using SurveyBasket.Persistence;
 
-namespace SurveyBasket.Services
+namespace SurveyBasket.Services.Polls
 {
     public  class PollService(AppDbContext context) : IPollService
     {
