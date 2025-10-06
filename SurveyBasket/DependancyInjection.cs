@@ -66,7 +66,10 @@ namespace SurveyBasket
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
 
-            services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+            //services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+            services.AddOptions<JwtOptions>()
+                .BindConfiguration(JwtOptions.SectionName)
+                .ValidateDataAnnotations();
 
             var jwtSettings = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
 
