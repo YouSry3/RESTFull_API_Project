@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using SurveyBasket.Contract.Authentication.JWT;
 
 namespace SurveyBasket.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthController(IAuthService authService) : ControllerBase
+    public class AuthController(IAuthService authService,
+        IOptions<JwtOptions> jwtOptions
+        ) : ControllerBase
     {
         private readonly IAuthService AuthService = authService;
+        private readonly JwtOptions JwtOptions = jwtOptions.Value;
 
         [HttpPost("")]
         public async Task<IActionResult> LoginAsync(AuthRequest request, CancellationToken cancellationToken)
@@ -19,5 +24,12 @@ namespace SurveyBasket.Controllers
                 :Ok(response);
 
         }
+
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok(JwtOptions.Key);
+        }
+
     }
 }
