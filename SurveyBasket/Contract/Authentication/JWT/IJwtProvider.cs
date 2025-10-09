@@ -1,7 +1,11 @@
-﻿namespace SurveyBasket.Contract.Authentication.JWT
+﻿using Microsoft.Identity.Client;
+
+namespace SurveyBasket.Contract.Authentication.JWT
 {
     public interface IJwtProvider
     {
-       public (String Token, int ExpiresIn) GenerateToken(ApplicationUser user);
+        (String Token, int ExpiresIn) GenerateToken(ApplicationUser user);
+        String? ValidateToken(string token);
+
     }
 }
