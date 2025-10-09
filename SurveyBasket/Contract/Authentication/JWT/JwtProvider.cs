@@ -22,7 +22,7 @@ namespace SurveyBasket.Contract.Authentication.JWT
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-
+            
 
             var token = new JwtSecurityToken(
                 issuer: JwtOptions.Issuer,

@@ -39,7 +39,7 @@ namespace ProjectRESTFullApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute]int id, PollRequest Requestm,CancellationToken cancellationToken)
+        public async Task<IActionResult> Update([FromRoute]int id, PollRequest Request,CancellationToken cancellationToken)
         {
             var isUpdate =await _PollService.UpdateAsync(id, Request.Adapt<Poll>(), cancellationToken);
            
