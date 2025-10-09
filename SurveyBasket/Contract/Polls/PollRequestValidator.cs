@@ -24,7 +24,7 @@
         private bool HasVaildDate(PollRequest pollRequest)
         {
           
-            return pollRequest.EndsAt > pollRequest.StartAt;
+            return pollRequest.EndsAt >= pollRequest.StartAt;
         }
     
     }

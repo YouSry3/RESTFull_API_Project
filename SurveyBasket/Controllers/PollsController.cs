@@ -8,6 +8,8 @@ namespace ProjectRESTFullApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class PollsController(IPollService PollService) : ControllerBase
     {
         private readonly IPollService _PollService = PollService;
@@ -22,7 +24,6 @@ namespace ProjectRESTFullApi.Controllers
             return IsExist == null ? NotFound() : Ok(IsExist);
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {
             var Polls = await _PollService.GetAllAsync(cancellationToken);
             var PollResponse = Polls.Adapt<List<PollResponse>>();
@@ -35,7 +36,7 @@ namespace ProjectRESTFullApi.Controllers
         public async Task<IActionResult> Add([FromBody]PollRequest Request, CancellationToken cancellationToken)
         {
             var createdPoll =await _PollService.AddAsync(Request.Adapt<Poll>(), cancellationToken);
-            return CreatedAtAction(nameof(Get), new { id = createdPoll.Id }, createdPoll.Adapt<PollResponse>());
+            return CreatedAtAction(nameof(Get), new { id = createdPoll.Id }, createdPoll);
         }
 
         [HttpPut("{id:int}")]
