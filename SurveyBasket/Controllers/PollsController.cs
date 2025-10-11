@@ -36,7 +36,7 @@ namespace ProjectRESTFullApi.Controllers
         public async Task<IActionResult> Add([FromBody]PollRequest Request, CancellationToken cancellationToken)
         {
             var createdPoll =await _PollService.AddAsync(Request.Adapt<Poll>(), cancellationToken);
-            return CreatedAtAction(nameof(Get), new { id = createdPoll.Id }, createdPoll);
+            return CreatedAtAction(nameof(Get), new { id = createdPoll.Id }, createdPoll.Adapt<PollResponse>());
         }
 
         [HttpPut("{id:int}")]
