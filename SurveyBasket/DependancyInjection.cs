@@ -18,18 +18,20 @@ namespace SurveyBasket
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+           var AllowsOrigin = configuration.GetSection("AllowedOrigin").Get<string[]>();
 
             services.AddCors(options =>
                    options.AddPolicy("AllowAll", builder =>
                    builder
-                   .AllowAnyOrigin()
                    .AllowAnyMethod()
                    .AllowAnyHeader()
+                   .WithOrigins(AllowsOrigin!)
                    ));
-            //.AllowAnyMethod()
-            //.AllowAnyHeader()
+
+            //Custom Allow Origin for specific client
             //.WithOrigins("http://localhost:5173")
-            //));
+
+
             // Controllers + FluentValidation
             services.AddControllers()
                     .AddFluentValidation(fv =>
