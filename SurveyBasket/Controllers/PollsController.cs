@@ -8,7 +8,7 @@ namespace ProjectRESTFullApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class PollsController(IPollService PollService) : ControllerBase
     {

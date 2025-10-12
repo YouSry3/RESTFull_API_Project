@@ -18,12 +18,26 @@ namespace SurveyBasket
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+
+            services.AddCors(options =>
+                   options.AddPolicy("AllowAll", builder =>
+                   builder
+                   .AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   ));
+            //.AllowAnyMethod()
+            //.AllowAnyHeader()
+            //.WithOrigins("http://localhost:5173")
+            //));
             // Controllers + FluentValidation
             services.AddControllers()
                     .AddFluentValidation(fv =>
                     {
                         fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
                     });
+            //CorsEndpointConventionBuilderExtensions 
+           
 
             // Custom Services + Mapster
             services.AddServices()
