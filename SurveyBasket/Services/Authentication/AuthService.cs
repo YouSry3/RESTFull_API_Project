@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using SurveyBasket.Contract.Authentication.JWT;
 using SurveyBasket.Entities;
+using SurveyBasket.Errors;
 using System.Security.Cryptography;
 
 namespace SurveyBasket.Services.Authentication
@@ -13,17 +14,17 @@ namespace SurveyBasket.Services.Authentication
         private readonly int _RefrshTokenExpiryDays = 14;
 
 
-        public async Task<AuthResponse?> GetTokenAsync(string email, string password, CancellationToken cancellationToken = default)
+        public async Task<Result<AuthResponse>> GetTokenAsync(string email, string password, CancellationToken cancellationToken = default)
         {
             //check Email is Vaild
            var IsVaildUser =  await UserManager.FindByEmailAsync(email);
             if (IsVaildUser == null)
-                return null;
+                return Result.Failure<AuthResponse>(UserErrors.InValidCredentials);
 
            var isVaildRequest= await UserManager.CheckPasswordAsync(IsVaildUser, password);
 
             if(!isVaildRequest)
-                return null;
+                return Result.Failure<AuthResponse>(UserErrors.InValidCredentials);
 
             //Generate Token
             var (Token, ExpiresIn) = _JwtProvider.GenerateToken(IsVaildUser);
@@ -41,9 +42,7 @@ namespace SurveyBasket.Services.Authentication
 
             await UserManager.UpdateAsync(IsVaildUser);
 
-
-
-            return new AuthResponse(
+            var response = new AuthResponse(
                 Guid.NewGuid().ToString(),
                 IsVaildUser.Email!,
                 IsVaildUser.FristName,
@@ -52,9 +51,11 @@ namespace SurveyBasket.Services.Authentication
                 ExpiresIn,
      RefreshToken,
                 RefreshTokenExpiration
-
                   );
 
+
+
+            return Result.Success(response);
 
         }
 
