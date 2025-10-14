@@ -21,7 +21,9 @@ namespace ProjectRESTFullApi.Controllers
             var Result = await _PollService.GetAsync(id, cancellationToken);
 
 
-            return Result.IsSuccess ?  Ok(Result.Value) : NotFound(Result.Error);
+            return Result.IsSuccess ? 
+                Ok(Result.Value) : 
+                NotFound(Result.Error);
         }
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {

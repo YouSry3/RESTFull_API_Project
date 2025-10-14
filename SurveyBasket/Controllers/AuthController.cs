@@ -18,11 +18,11 @@ namespace SurveyBasket.Controllers
         [HttpPost("")]
         public async Task<IActionResult> LoginAsync([FromBody] AuthRequest request, CancellationToken cancellationToken)
         {
-            var AuthResult = await AuthService.GetTokenAsync(request.Email, request.Password, cancellationToken);
+            var Result = await AuthService.GetTokenAsync(request.Email, request.Password, cancellationToken);
 
-            return AuthResult.IsSuccess ?
-                Ok(AuthResult.Value) :
-                BadRequest(AuthResult.Error);
+            return Result.IsSuccess ?
+                Ok(Result.Value) :
+                BadRequest(Result.Error);
 
         }
          

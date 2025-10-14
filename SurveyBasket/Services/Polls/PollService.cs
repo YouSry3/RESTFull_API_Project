@@ -22,11 +22,9 @@ namespace SurveyBasket.Services.Polls
         
 
 
-        public async Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            var Polls = await _context.Polls.AsNoTracking().ToListAsync(cancellationToken); 
-            return Polls;
-        }
+        public async Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken = default)=>
+            await _context.Polls.AsNoTracking().ToListAsync(cancellationToken); 
+        
 
         public async Task<Result<PollResponse>> AddAsync(PollRequest request, CancellationToken cancellationToken = default)
         {
@@ -69,7 +67,7 @@ namespace SurveyBasket.Services.Polls
 
             var IsExitPoll = await _context.Polls.FindAsync(id, cancellationToken);
 
-            if (IsExitPoll == null) return Result.Failure(PollErrors.PollNotFound(id));
+            if (IsExitPoll is null) return Result.Failure(PollErrors.PollNotFound(id));
 
             IsExitPoll.IsPublished = !IsExitPoll.IsPublished;
 
