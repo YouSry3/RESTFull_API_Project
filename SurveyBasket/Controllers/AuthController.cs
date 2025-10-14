@@ -29,30 +29,26 @@ namespace SurveyBasket.Controllers
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshAsync([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
-            var AuthResult = await AuthService.GetRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
+            var Result = await AuthService.GetRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
 
-            return AuthResult == null ?
-                BadRequest("Invalid 'Token'")
-                : Ok(AuthResult);
+            return Result.IsSuccess ?
+                Ok(Result.Value) :
+                BadRequest(Result.Error);
 
         }
 
         [HttpPut("revoke-refresh-token")]
         public async Task<IActionResult> RevokedRefreshAsync([FromBody]RefreshTokenRequest request, CancellationToken cancellationToken)
         {
-            var IsRevoked = await AuthService.GetRevokedRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
+            var Result = await AuthService.GetRevokedRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
 
-            return IsRevoked ?
+            return Result.IsSuccess ?
                 Ok("Revoked Success ^ _ ^") :
-                BadRequest("Operation 'Failed'")
+                BadRequest(Result.Error)
                 ;
 
         }
-        //[HttpGet("Test")]
-        //public IActionResult Test()
-        //{
-        //    return Ok(JwtOptions.Key);
-        //}
+    
 
     }
 }
