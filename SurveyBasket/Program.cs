@@ -1,5 +1,6 @@
 ﻿using SurveyBasket;
- // مهم عشان AddProjectServices تشتغل (Namespace بتاعك)
+
+// مهم عشان AddProjectServices تشتغل (Namespace بتاعك)
 
 namespace SurveyBasket
 {
@@ -28,6 +29,8 @@ namespace SurveyBasket
 
             app.UseAuthorization();
             app.MapControllers();
+
+            app.UseMiddleware<ExceptionHandling>();
 
             app.Run();
         }
