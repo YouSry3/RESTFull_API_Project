@@ -22,7 +22,7 @@ namespace SurveyBasket.Controllers
 
             return Result.IsSuccess ?
                 Ok(Result.Value) :
-                BadRequest(Result.Error);
+                Result.ToProblem(StatusCodes.Status400BadRequest);
 
         }
          
@@ -33,7 +33,8 @@ namespace SurveyBasket.Controllers
 
             return Result.IsSuccess ?
                 Ok(Result.Value) :
-                BadRequest(Result.Error);
+                Result.ToProblem(StatusCodes.Status400BadRequest);
+
 
         }
 
@@ -44,8 +45,8 @@ namespace SurveyBasket.Controllers
 
             return Result.IsSuccess ?
                 Ok("Revoked Success ^ _ ^") :
-                BadRequest(Result.Error)
-                ;
+                Result.ToProblem(StatusCodes.Status400BadRequest);
+                
 
         }
     

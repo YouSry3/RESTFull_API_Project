@@ -21,9 +21,10 @@ namespace ProjectRESTFullApi.Controllers
             var Result = await _PollService.GetAsync(id, cancellationToken);
 
 
-            return Result.IsSuccess ? 
-                Ok(Result.Value) : 
-                NotFound(Result.Error);
+            return Result.IsSuccess ?
+                Ok(Result.Value) :
+                Result.ToProblem(StatusCodes.Status404NotFound);
+
         }
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {
@@ -47,7 +48,9 @@ namespace ProjectRESTFullApi.Controllers
             var Result = await _PollService.UpdateAsync(id, Request, cancellationToken);
 
 
-            return Result.IsFailure ? NotFound(Result.Error) : NoContent();
+            return Result.IsSuccess ? 
+                    NoContent():
+                    Result.ToProblem(StatusCodes.Status404NotFound);
 
         }
 
@@ -56,7 +59,9 @@ namespace ProjectRESTFullApi.Controllers
         {
             var Result = await _PollService.TogglePublishAsync(id, cancellationToken);
 
-            return Result.IsFailure ? NotFound() : NoContent();
+            return Result.IsSuccess ?
+                  NoContent():
+                  Result.ToProblem(StatusCodes.Status404NotFound);
 
         }
         [HttpDelete("{id:int}")]
@@ -65,7 +70,7 @@ namespace ProjectRESTFullApi.Controllers
 
             var Result = await _PollService.DeleteAsync(id, cancellationToken);
             
-            return Result.IsSuccess? NoContent() : NotFound();
+            return Result.IsSuccess? NoContent() : Result.ToProblem(StatusCodes.Status404NotFound);
         }
 
 
