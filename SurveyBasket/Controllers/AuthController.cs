@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+﻿
 using SurveyBasket.Contract.Authentication.JWT;
 using SurveyBasket.Contract.Authentication.RefreshToken;
 
@@ -18,7 +16,6 @@ namespace SurveyBasket.Controllers
         [HttpPost("")]
         public async Task<IActionResult> LoginAsync([FromBody] AuthRequest request, CancellationToken cancellationToken)
         {
-            throw new Exception("Test Exception Handling Middleware");
             var Result = await AuthService.GetTokenAsync(request.Email, request.Password, cancellationToken);
 
             return Result.IsSuccess ?
