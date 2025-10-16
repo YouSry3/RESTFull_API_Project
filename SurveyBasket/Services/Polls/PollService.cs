@@ -1,7 +1,9 @@
 ﻿
 
 
-using Microsoft.AspNetCore.Http.HttpResults;
+
+
+using System.Collections.Generic;
 
 namespace SurveyBasket.Services.Polls
 {
@@ -22,7 +24,7 @@ namespace SurveyBasket.Services.Polls
         
 
 
-        public async Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken = default)=>
+        public async Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken) =>
             await _context.Polls.AsNoTracking().ToListAsync(cancellationToken); 
         
 
@@ -75,5 +77,8 @@ namespace SurveyBasket.Services.Polls
 
             return Result.Success();
         }
+
+        
+       
     }
 }
