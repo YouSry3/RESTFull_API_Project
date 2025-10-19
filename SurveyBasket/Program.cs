@@ -10,7 +10,11 @@ namespace SurveyBasket
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            
+
+            //builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
+            //    .AddEntityFrameworkStores<AppDbContext>();
+
+
             // 👇 تسجّل كل الخدمات (Controllers + FluentValidation + Mapster + Swagger)
             builder.Services.AddProjectServices(builder.Configuration);
 
@@ -28,6 +32,9 @@ namespace SurveyBasket
             app.UseCors("AllowAll");
 
             app.UseAuthorization();
+
+            //app.MapIdentityApi<ApplicationUser>();
+
             app.MapControllers();
 
             app.UseMiddleware<ExceptionHandling>();

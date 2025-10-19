@@ -9,7 +9,7 @@ namespace SurveyBasket.Controllers
     public class AuthController(IAuthService authService,
         IOptions<JwtOptions> jwtOptions
         ) : ControllerBase
-        {
+    {
         private readonly IAuthService AuthService = authService;
         private readonly JwtOptions JwtOptions = jwtOptions.Value;
 
@@ -23,7 +23,7 @@ namespace SurveyBasket.Controllers
                 Result.ToProblem(StatusCodes.Status400BadRequest);
 
         }
-         
+
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshAsync([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
@@ -37,17 +37,17 @@ namespace SurveyBasket.Controllers
         }
 
         [HttpPut("revoke-refresh-token")]
-        public async Task<IActionResult> RevokedRefreshAsync([FromBody]RefreshTokenRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> RevokedRefreshAsync([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
             var Result = await AuthService.GetRevokedRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
 
             return Result.IsSuccess ?
                 Ok("Revoked Success ^ _ ^") :
                 Result.ToProblem(StatusCodes.Status400BadRequest);
-                
+
 
         }
-    
+
 
     }
 }

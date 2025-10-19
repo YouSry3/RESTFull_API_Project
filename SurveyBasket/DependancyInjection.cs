@@ -59,6 +59,7 @@ namespace SurveyBasket
         {
             services.AddScoped<IPollService, PollService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IQuestionService, QuestionService>();
             services.AddSingleton<IJwtProvider, JwtProvider>();
 
 
@@ -92,7 +93,7 @@ namespace SurveyBasket
 
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme =  JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
             })
@@ -112,7 +113,7 @@ namespace SurveyBasket
                     };
                 });
 
-         
+
 
             return services;
         }
