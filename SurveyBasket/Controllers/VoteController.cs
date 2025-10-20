@@ -13,7 +13,7 @@ namespace SurveyBasket.Controllers
         [HttpGet]
         public async Task<IActionResult> Start([FromRoute]int pollId , CancellationToken cancellationToken)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.GetUserId();
 
             var result = await QuestionService.GetAvaildableAsync(pollId, userId!, cancellationToken);
 

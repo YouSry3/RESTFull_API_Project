@@ -26,5 +26,7 @@ global using System.Reflection;
 global using System.Security.Claims;
 global using System.Diagnostics.Contracts;
 
+global using SurveyBasket.Extensions;
+
 global using SurveyBasket.Contract.Questions;
 global using SurveyBasket.Services.Questions;
