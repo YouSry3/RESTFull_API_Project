@@ -358,6 +358,63 @@ namespace SurveyBasket.Persistence.Migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("SurveyBasket.Entities.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("SubmittedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("pollId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("userId");
+
+                    b.HasIndex("pollId", "userId")
+                        .IsUnique();
+
+                    b.ToTable("Votes");
+                });
+
+            modelBuilder.Entity("SurveyBasket.Entities.VoteAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("answerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("questionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("voteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("answerId");
+
+                    b.HasIndex("questionId");
+
+                    b.HasIndex("voteId", "questionId")
+                        .IsUnique();
+
+                    b.ToTable("VoteAnswers");
+                });
+
             modelBuilder.Entity("SurveyBasket.Entities.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -479,6 +536,52 @@ namespace SurveyBasket.Persistence.Migrations
                     b.Navigation("UpdateBy");
                 });
 
+            modelBuilder.Entity("SurveyBasket.Entities.Vote", b =>
+                {
+                    b.HasOne("SurveyBasket.Entities.Poll", "Poll")
+                        .WithMany("Votes")
+                        .HasForeignKey("pollId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SurveyBasket.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Poll");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SurveyBasket.Entities.VoteAnswer", b =>
+                {
+                    b.HasOne("SurveyBasket.Entities.Answer", "Answer")
+                        .WithMany()
+                        .HasForeignKey("answerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SurveyBasket.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("questionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SurveyBasket.Entities.Vote", "Vote")
+                        .WithMany("VoteAnswers")
+                        .HasForeignKey("voteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Answer");
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Vote");
+                });
+
             modelBuilder.Entity("SurveyBasket.Entities.ApplicationUser", b =>
                 {
                     b.OwnsMany("SurveyBasket.Entities.RefreshToken", "RefreshTokens", b1 =>
@@ -519,11 +622,18 @@ namespace SurveyBasket.Persistence.Migrations
             modelBuilder.Entity("SurveyBasket.Entities.Poll", b =>
                 {
                     b.Navigation("Questions");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("SurveyBasket.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("SurveyBasket.Entities.Vote", b =>
+                {
+                    b.Navigation("VoteAnswers");
                 });
 #pragma warning restore 612, 618
         }

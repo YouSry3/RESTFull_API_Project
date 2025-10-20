@@ -11,6 +11,8 @@
 
 
         public ICollection<Question> Questions { get; set; } = [];
+        public ICollection<Vote> Votes { get; set; } = [];
+
 
 
     }
