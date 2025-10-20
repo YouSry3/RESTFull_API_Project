@@ -22,6 +22,16 @@ namespace SurveyBasket.Services.Polls
                 Result.Failure<PollResponse>(PollErrors.PollNotFound(id));
         }
 
+        public async Task<IEnumerable<PollResponse>> GetCurrentAsync(CancellationToken cancellationToken = default)=>
+             await _context.Polls
+            .Where(x=> x.IsPublished && x.StartAt <= DateOnly.FromDateTime(DateTime.UtcNow) &&  x.EndsAt >= DateOnly.FromDateTime(DateTime.UtcNow))
+            .AsNoTracking()
+            .ProjectToType<PollResponse>()
+            .ToListAsync(cancellationToken);
+
+
+        
+
 
 
         public async Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken)=>
