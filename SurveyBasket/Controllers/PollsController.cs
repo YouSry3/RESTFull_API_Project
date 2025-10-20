@@ -30,7 +30,11 @@ namespace ProjectRESTFullApi.Controllers
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken )=> 
              Ok(await _PollService.GetAllAsync(cancellationToken));
 
-        
+        [HttpGet("Current")]
+        public async Task<IActionResult> GetCurrent(CancellationToken cancellationToken) =>
+        Ok(await _PollService.GetCurrentAsync(cancellationToken));
+
+
 
 
         [HttpPost]
