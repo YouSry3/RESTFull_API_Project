@@ -8,7 +8,7 @@ namespace ProjectRESTFullApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
 
     public class PollsController(IPollService PollService) : ControllerBase
     {
@@ -27,12 +27,10 @@ namespace ProjectRESTFullApi.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken ) {
-            var Polls = await _PollService.GetAllAsync(cancellationToken);
-            var PollResponse = Polls.Adapt<List<PollResponse>>();
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken )=> 
+             Ok(await _PollService.GetAllAsync(cancellationToken));
 
-            return Ok(PollResponse);
-        }
+        
 
 
         [HttpPost]

@@ -21,11 +21,14 @@ namespace SurveyBasket.Services.Polls
                 Result.Success(PollResult.Adapt<PollResponse>()) :
                 Result.Failure<PollResponse>(PollErrors.PollNotFound(id));
         }
-        
 
 
-        public async Task<List<Poll>> GetAllAsync(CancellationToken cancellationToken) =>
-            await _context.Polls.AsNoTracking().ToListAsync(cancellationToken); 
+
+        public async Task<IEnumerable<PollResponse>> GetAllAsync(CancellationToken cancellationToken)=>
+            await _context.Polls
+            .AsNoTracking()
+            .ProjectToType<PollResponse>()
+            .ToListAsync(cancellationToken); 
         
 
         public async Task<Result<PollResponse>> AddAsync(PollRequest request, CancellationToken cancellationToken = default)
@@ -78,7 +81,6 @@ namespace SurveyBasket.Services.Polls
             return Result.Success();
         }
 
-        
-       
+   
     }
 }
