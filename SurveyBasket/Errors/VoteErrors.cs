@@ -12,5 +12,10 @@
                 "Vote.DuplicateVotes",
                 $"This user already voted before for this poll."
             );
+        public static Error InvalidQuestionsInVote() =>
+            new(
+                "Vote.InvalidQuestionsInVote",
+                $"Invalid Questions."
+            );
     }
 }

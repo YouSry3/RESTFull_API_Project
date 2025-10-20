@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SurveyBasket.Contract.Authentication.JWT;
 using SurveyBasket.Entities;
+using SurveyBasket.Services.Votes;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -60,6 +61,7 @@ namespace SurveyBasket
             services.AddScoped<IPollService, PollService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IVoteService, VoteService>();
             services.AddSingleton<IJwtProvider, JwtProvider>();
 
 
