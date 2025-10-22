@@ -15,12 +15,11 @@ namespace SurveyBasket
             //    .AddEntityFrameworkStores<AppDbContext>();
 
 
-            // 👇 تسجّل كل الخدمات (Controllers + FluentValidation + Mapster + Swagger)
+            //(Controllers + FluentValidation + Mapster + Swagger)
             builder.Services.AddProjectServices(builder.Configuration);
 
             var app = builder.Build();
 
-            // 👇 إعداد Swagger في وضع التطوير
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
