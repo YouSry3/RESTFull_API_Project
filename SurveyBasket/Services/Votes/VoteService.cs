@@ -32,17 +32,21 @@ namespace SurveyBasket.Services.Votes
                 .Select(q => q.Id)
                 .ToListAsync(cancellationToken);
 
-            if(request.Answers.Select(x=> x.QuestionId)
-                .SequenceEqual(availableQuestions))
+            if (!request.Answers.Select(x => x.QuestionId).SequenceEqual(availableQuestions))
                 return Result.Failure(VoteErrors.InvalidQuestionsInVote());
 
             var vote = new Vote
             {
                 pollId = pollId,
                 userId = userId,
-                VoteAnswers = request.Answers.Adapt<IEnumerable<VoteAnswer>>().ToList()
-            };
-
+                VoteAnswers = request.Answers
+                     .Select(a => new VoteAnswer
+                     {
+                         questionId = a.QuestionId,
+                         answerId = a.AnswerId
+                     })
+                     .ToList()
+                        };
             await _context.Votes.AddAsync(vote, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
