@@ -38,7 +38,7 @@ namespace SurveyBasket.Controllers
             if (result.IsSuccess)
                return CreatedAtAction(nameof(Get), new { pollId, result.Value.Id}, result.Value);
             
-            return result.Error!.Equals(QuestionErrors.DuplicateQuestionContent)
+            return result.Error!.Equals(QuestionErrors.DuplicateQuestionContent())
                 ? result.ToProblem(StatusCodes.Status409Conflict)
                 : result.ToProblem(StatusCodes.Status404NotFound);
         }
@@ -51,7 +51,7 @@ namespace SurveyBasket.Controllers
             var result = await QuestionService.UpdateAsync(pollId, id, request, cancellation);
             return result.IsSuccess ?
                   NoContent() :
-                  result.Error!.Equals(QuestionErrors.DuplicateQuestionContent) ?
+                  result.Error!.Equals(QuestionErrors.DuplicateQuestionContent()) ?
                       result.ToProblem(StatusCodes.Status409Conflict) :
                       result.ToProblem(StatusCodes.Status404NotFound);
         }

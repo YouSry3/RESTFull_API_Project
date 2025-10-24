@@ -9,6 +9,8 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Identity;
 global using SurveyBasket.Abstractions;
 global using SurveyBasket.Contract.Answers;
 global using SurveyBasket.Contract.Authentication;
@@ -25,6 +27,11 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Reflection;
 global using System.Security.Claims;
 global using System.Diagnostics.Contracts;
+global using SurveyBasket.Services.Votes;
+global using SurveyBasket.Services.ResultVoted;
+global using SurveyBasket.Contract.Authentication.JWT;
+
+
 
 global using SurveyBasket.Extensions;
 

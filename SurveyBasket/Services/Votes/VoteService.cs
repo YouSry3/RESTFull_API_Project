@@ -9,6 +9,7 @@ namespace SurveyBasket.Services.Votes
 
         public async Task<Result> AddAsync(int pollId, string userId, VoteRequest request, CancellationToken cancellationToken)
         {
+            // check if user has already Voted or Not 
             var hasVote = await _context.Votes
              .AnyAsync(v => v.pollId == pollId
              && v.userId == userId
