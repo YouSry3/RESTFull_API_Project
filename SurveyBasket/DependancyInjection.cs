@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SurveyBasket.Contract.Authentication.JWT;
-using SurveyBasket.Entities;
+using SurveyBasket.Persistence.Entities;
 using SurveyBasket.Services.Votes;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;

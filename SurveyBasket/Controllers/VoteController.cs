@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SurveyBasket.Abstractions.Errors;
 using SurveyBasket.Contract.Vote;
 using SurveyBasket.Services.Votes;
 

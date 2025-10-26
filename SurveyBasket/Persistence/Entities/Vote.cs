@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SurveyBasket.Entities
+namespace SurveyBasket.Persistence.Entities
 {
     public sealed class Vote
     {

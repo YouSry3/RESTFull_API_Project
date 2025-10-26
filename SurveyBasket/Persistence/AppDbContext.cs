@@ -3,6 +3,7 @@
 
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SurveyBasket.Persistence.Entities;
 
 namespace SurveyBasket.Persistence
 {

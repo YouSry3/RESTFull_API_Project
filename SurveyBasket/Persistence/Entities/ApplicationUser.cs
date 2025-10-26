@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SurveyBasket.Entities
+namespace SurveyBasket.Persistence.Entities
 {
     public class ApplicationUser : IdentityUser
     {

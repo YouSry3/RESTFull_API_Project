@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using SurveyBasket.Abstractions.Errors;
 using SurveyBasket.Contract.Authentication.JWT;
-using SurveyBasket.Entities;
-using SurveyBasket.Errors;
+using SurveyBasket.Persistence.Entities;
 using System.Security.Cryptography;
 
 namespace SurveyBasket.Services.Authentication

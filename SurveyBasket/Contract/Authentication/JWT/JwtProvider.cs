@@ -2,6 +2,8 @@
 
 
 
+using SurveyBasket.Persistence.Entities;
+
 namespace SurveyBasket.Contract.Authentication.JWT
 {
     public class JwtProvider(IOptions<JwtOptions> jwtOptions) : IJwtProvider

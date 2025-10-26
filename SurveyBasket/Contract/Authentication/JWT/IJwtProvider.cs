@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using SurveyBasket.Persistence.Entities;
 
 namespace SurveyBasket.Contract.Authentication.JWT
 {

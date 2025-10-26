@@ -3,6 +3,8 @@
 
 
 
+using SurveyBasket.Abstractions.Errors;
+using SurveyBasket.Persistence.Entities;
 using System.Collections.Generic;
 
 namespace SurveyBasket.Services.Polls

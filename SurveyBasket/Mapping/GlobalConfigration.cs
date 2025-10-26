@@ -1,5 +1,7 @@
 ﻿
 
+using SurveyBasket.Persistence.Entities;
+
 namespace ProjectRESTFullApi.Mapping
 {
     public class GlobalConfigration : IRegister

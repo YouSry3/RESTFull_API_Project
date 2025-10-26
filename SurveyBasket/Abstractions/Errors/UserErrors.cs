@@ -1,4 +1,4 @@
-﻿namespace SurveyBasket.Errors
+﻿namespace SurveyBasket.Abstractions.Errors
 {
     public static class UserErrors
     {

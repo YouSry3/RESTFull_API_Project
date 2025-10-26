@@ -1,4 +1,4 @@
-﻿namespace SurveyBasket.Entities
+﻿namespace SurveyBasket.Persistence.Entities
 {
     public class AuditEntity
     {

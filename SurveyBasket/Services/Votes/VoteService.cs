@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SurveyBasket.Abstractions.Errors;
 using SurveyBasket.Contract.Vote;
+
 
 namespace SurveyBasket.Services.Votes
 {
