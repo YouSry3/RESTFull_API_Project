@@ -1,19 +1,7 @@
 ﻿
 
-<<<<<<< HEAD
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using SurveyBasket.Contract.Authentication.JWT;
-using SurveyBasket.Persistence.Entities;
-using SurveyBasket.Services.Votes;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-=======
 
 
-
->>>>>>> 94e0d95b7fb0a8a3878a6d120a9764111008b7b3
 
 namespace SurveyBasket
 {

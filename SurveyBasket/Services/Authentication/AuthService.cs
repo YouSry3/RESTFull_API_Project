@@ -1,10 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
-<<<<<<< HEAD
 using SurveyBasket.Abstractions.Errors;
-=======
 using SurveyBasket.Contract.Authentication.Auth;
->>>>>>> 94e0d95b7fb0a8a3878a6d120a9764111008b7b3
 using SurveyBasket.Contract.Authentication.JWT;
 using SurveyBasket.Persistence.Entities;
 using System.Security.Cryptography;

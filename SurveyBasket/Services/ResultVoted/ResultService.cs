@@ -1,4 +1,5 @@
-﻿using SurveyBasket.Contract.Result;
+﻿
+using SurveyBasket.Contract.Result;
 
 namespace SurveyBasket.Services.ResultVoted
 {

@@ -16,6 +16,8 @@ global using SurveyBasket.Contract.Answers;
 global using SurveyBasket.Contract.Authentication;
 global using SurveyBasket.Contract.Polls;
 global using SurveyBasket.Persistence.Entities;
+global using SurveyBasket.Abstractions.Errors;
+
 
 global using SurveyBasket.Middelware;
 global using SurveyBasket.Persistence;
